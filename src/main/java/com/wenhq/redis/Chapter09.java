@@ -47,7 +47,7 @@ public class Chapter09 {
     }
 
     public void run() {
-        Jedis conn = new Jedis("localhost");
+        Jedis conn = new Jedis(Config.host);
         conn.select(15);
         conn.flushDB();
 

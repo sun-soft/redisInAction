@@ -13,7 +13,7 @@ import com.google.gson.Gson;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.Tuple;
 
-public class Chapter02
+public class Chapter02 extends Config
 {
         public static final void main(String[] args) throws InterruptedException
         {
@@ -22,7 +22,7 @@ public class Chapter02
 
         public void run() throws InterruptedException
         {
-                Jedis conn = new Jedis("localhost");
+                Jedis conn = new Jedis(Config.host);
                 conn.select(15);
 
                 testLoginCookies(conn);
@@ -319,7 +319,7 @@ public class Chapter02
 
                 public CleanSessionsThread(int limit)
                 {
-                        this.conn = new Jedis("localhost");
+                        this.conn = new Jedis(Config.host);
                         this.conn.select(15);
                         this.limit = limit;
                 }
@@ -379,7 +379,7 @@ public class Chapter02
 
                 public CleanFullSessionsThread(int limit)
                 {
-                        this.conn = new Jedis("localhost");
+                        this.conn = new Jedis(Config.host);
                         this.conn.select(15);
                         this.limit = limit;
                 }
@@ -436,7 +436,7 @@ public class Chapter02
 
                 public CacheRowsThread()
                 {
-                        this.conn = new Jedis("localhost");
+                        this.conn = new Jedis(Config.host);
                         this.conn.select(15);
                 }
 

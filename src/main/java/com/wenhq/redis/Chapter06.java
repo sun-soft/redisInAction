@@ -21,7 +21,7 @@ public class Chapter06 {
     public void run()
         throws InterruptedException, IOException
     {
-        Jedis conn = new Jedis("localhost");
+        Jedis conn = new Jedis(Config.host);
         conn.select(15);
 
         testAddUpdateContact(conn);
@@ -780,7 +780,7 @@ public class Chapter06 {
         private Gson gson = new Gson();
 
         public PollQueueThread(){
-            this.conn = new Jedis("localhost");
+            this.conn = new Jedis(Config.host);
             this.conn.select(15);
         }
 
@@ -830,7 +830,7 @@ public class Chapter06 {
         private long limit;
 
         public CopyLogsThread(File path, String channel, int count, long limit) {
-            this.conn = new Jedis("localhost");
+            this.conn = new Jedis(Config.host);
             this.conn.select(15);
             this.path = path;
             this.channel = channel;

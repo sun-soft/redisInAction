@@ -21,7 +21,7 @@ public class Chapter08 {
     public void run()
         throws InterruptedException
     {
-        Jedis conn = new Jedis("localhost");
+        Jedis conn = new Jedis(Config.host);
         conn.select(15);
         conn.flushDB();
 
@@ -539,7 +539,7 @@ public class Chapter08 {
         }
 
         public void run() {
-            Jedis conn = new Jedis("localhost");
+            Jedis conn = new Jedis(Config.host);
             conn.select(15);
 
             Object[] args = new Object[this.args.length + 1];

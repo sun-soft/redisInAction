@@ -37,7 +37,7 @@ public class Chapter05 {
     public void run()
         throws InterruptedException
     {
-        Jedis conn = new Jedis("localhost");
+        Jedis conn = new Jedis(Config.host);
         conn.select(15);
 
         testLogRecent(conn);
@@ -419,7 +419,7 @@ public class Chapter05 {
     public Jedis redisConnection(String component){
         Jedis configConn = REDIS_CONNECTIONS.get("config");
         if (configConn == null){
-            configConn = new Jedis("localhost");
+            configConn = new Jedis(Config.host);
             configConn.select(15);
             REDIS_CONNECTIONS.put("config", configConn);
         }
@@ -429,7 +429,7 @@ public class Chapter05 {
         Map<String,Object> config = getConfig(configConn, "redis", component);
 
         if (!config.equals(oldConfig)){
-            Jedis conn = new Jedis("localhost");
+            Jedis conn = new Jedis(Config.host);
             if (config.containsKey("db")){
                 conn.select(((Double)config.get("db")).intValue());
             }
@@ -539,7 +539,7 @@ public class Chapter05 {
         private long timeOffset; // used to mimic a time in the future.
 
         public CleanCountersThread(int sampleCount, long timeOffset){
-            this.conn = new Jedis("localhost");
+            this.conn = new Jedis(Config.host);
             this.conn.select(15);
             this.sampleCount = sampleCount;
             this.timeOffset = timeOffset;
