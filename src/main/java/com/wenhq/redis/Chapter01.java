@@ -57,7 +57,7 @@ public class Chapter01 extends Config{
 	}
 	
 	@Test
-	public void testHelloWorldThread() {
+	public void testHelloWorldThread() throws InterruptedException {
 		String key = "hello:a";
 		String value = " world世界";
 		MultipleThread t = new MultipleThread(10);
