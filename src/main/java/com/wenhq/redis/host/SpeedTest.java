@@ -15,6 +15,12 @@ import redis.clients.jedis.Jedis;
  *
  */
 public class SpeedTest {
+	
+	@Test
+	public void test() throws InterruptedException {
+		this.testMemory();
+		this.testRedis();
+	}
 
 	@Test
 	public void testMemory() throws InterruptedException {
@@ -26,7 +32,7 @@ public class SpeedTest {
 		for(int i = 0;i < count;i++) {
 			uMap.get("a");
 		}
-		System.out.println("花费时间:" + (new Date().getTime() - beginTime) + " / " + count);
+		System.out.println("testMemory 花费时间:" + (new Date().getTime() - beginTime) + " / 次数" + count);
 		
 	}
 	
@@ -39,7 +45,7 @@ public class SpeedTest {
 			for(int i = 0;i < count;i++) {
 				conn.get("a");
 			}
-			System.out.println("花费时间:" + (new Date().getTime() - beginTime) + " / " + count);
+			System.out.println("testRedis 花费时间:" + (new Date().getTime() - beginTime) + " / 次数" + count);
 		}
 
 		

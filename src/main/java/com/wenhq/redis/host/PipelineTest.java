@@ -22,6 +22,7 @@ public class PipelineTest {
 		end = System.currentTimeMillis();
 		System.out.println("withoutPipeline:" + (end - start));
 	}
+	
 	@Test
 	public void readPipeline() {
 		try {

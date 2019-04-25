@@ -20,13 +20,21 @@ public class MultipleThread {
 	}
 
 	public void run(Runnable run) throws InterruptedException {
-		startGate.await();
-		fixedThreadPool.execute(run);
+		fixedThreadPool.execute(()->{
+			try {
+				startGate.await();
+				run.run();
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+
+		});
 	}
 	
 	public void start() {
 		beginTime = new Date().getTime();
 		startGate.countDown();
+		close();
 	}
 
 	public void close() {

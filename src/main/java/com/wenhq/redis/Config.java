@@ -6,7 +6,7 @@ import redis.clients.jedis.Jedis;
 
 public class Config {
 //	public final static String host = "127.0.0.1";
-	public final static String host = "192.168.88.136";
+	public final static String host = "docker";
 	public final static int port = 6379;
 	
 	public Jedis conn ;

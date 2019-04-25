@@ -19,30 +19,28 @@ public class TransationTest {
 		
 	}
 
-	public boolean addItem(Jedis conn, String list) {
+	public void addItem(Jedis conn, String list) {
 		long end = System.currentTimeMillis() + 5000;
 
 		while (System.currentTimeMillis() < end) {
 			conn.watch(list);
 			if (conn.scard(list) > 5) {
 				conn.unwatch();
-				return false;
+				return;
 			}
 
 			Transaction trans = conn.multi();
 			for(int i = 0 ;i<3; i++) {
-				trans.sadd(list, Math.random() * 100 + "===" + i);
+				trans.sadd(list, i + "==" + Math.random() * 100);
 			}
 			Response<Long> pop = trans.append(list, "error");	//出错，但是redis会继续执行
 			trans.sadd(list, "last item");
 			List<Object> results = trans.exec();
-			System.out.println("pop = " + pop.get());
+//			System.out.println("pop = " + pop.get());
 			if (results == null) {
 				System.err.println("watch  错误");
 				continue;
 			}
-			return true;
 		}
-		return false;
 	}
 }
