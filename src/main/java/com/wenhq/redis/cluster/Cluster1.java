@@ -19,16 +19,16 @@ public class Cluster1 {
 		jedisClusterNodes.add(new HostAndPort("192.168.88.136", 7015));
 		JedisCluster jc = new JedisCluster(jedisClusterNodes);
 		jc.del("cluster:*");
-		for(int i = 0; i< 100; i++) {
-			String key = "cluster:" + i; 
+		for(int i = 0; i< 10; i++) {
+			String key = "{cluster}:" + i; 		//只对字符串内部的内容进行散列
 			String value = String.valueOf(i);
 			jc.set(key, value);
 			if (!value.equals(jc.get(key))) {
 				System.out.println("查找错误:" + i);
 			}
 		}
-		jc.set("foo", "bar");
-		String value = jc.get("b");
+		jc.set("cluster", "bar");
+		String value = jc.get("cluster");
 		System.out.print(value);
 	}
 
